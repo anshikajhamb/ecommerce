@@ -22,16 +22,38 @@
 						<p>Shipping Information:</p>
 						<hr>
 						<div class="form-field">
-							<input class="form-control" type="text" name="address" placeholder="Address..">
+
+			<input list="addresslist" class="form-control" type="text" name="address" placeholder="Address..">
+							<datalist id="addresslist">
+  {% for item in address%}
+  <option value ="{{item.address}}">
+   {%endfor%}
+  </datalist>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="city" placeholder="City..">
+							<input list="addresslist" class="form-control" type="text" name="city" placeholder="City..">
+								<datalist id="addresslist">
+  {% for item in address%}
+  <option value ="{{item.city}}">
+   {%endfor%}
+  </datalist>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="state" placeholder="State..">
+							<input list="addresslist" class="form-control" type="text" name="state" placeholder="State..">
+<datalist id="addresslist">
+  {% for item in address%}
+  <option value ="{{item.state}}">
+   {%endfor%}
+  </datalist>
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="zipcode" placeholder="Zipcode..">
+							<input list="addresslist" class="form-control" type="text" name="zipcode" placeholder="Zipcode..">
+
+<datalist id="addresslist">
+  {% for item in address%}
+  <option value ="{{item.zipcode}}">
+   {%endfor%}
+  </datalist>
 						</div>
 						
 					</div>
@@ -83,7 +105,6 @@
 
 	var shipping = '{{order.shipping}}'
 	var total = '{{order.cart_total}}'
-	var product = '{{order.name.name}}'
 
 	if (shipping == 'False') {
 	//hiding shipping-info class if it is a digital product since digital products dont need to be shipped. 
@@ -124,7 +145,6 @@
 			'name':null,
 			'email':null,
 			'total':total,
-			'product':product,
 			
 		}
 

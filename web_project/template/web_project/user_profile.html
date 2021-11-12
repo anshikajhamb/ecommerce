@@ -4,7 +4,8 @@
 
 <h3>Hello, {{name}}!</h3> 
 
- 
+ 				<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'savedaddress' %}">Saved Addresses</a>
+
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
@@ -26,6 +27,7 @@
 					<td>{{item.quantity}}</td>
 					<td>{{item.order.cart_total}}</td>
 					<td>{{item.order.complete}}</td>
+
 				</tr>
 				{% endfor %}
 

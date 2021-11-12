@@ -61,9 +61,12 @@ def checkout(request):
         order_items= order.addtocart_set.all()
         cartItems = order.item_total
         wishlistItems = order.wishlist_item_total
+        address = ShippingAddress.objects.filter(customer=customer)
+       
+
         user_name= 0
 
-        context= { 'user_name': user_name, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items, 'order' : order}
+        context= {'address': address, 'user_name': user_name, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items, 'order' : order}
         return render(request, 'web_project/checkout.html', context)
     else:  
         return redirect('login')
@@ -530,6 +533,29 @@ def user_profile(request):
     wishlistItems= order.wishlist_item_total
     context={'name': name, 'order_items': order_items, 'orders': orders, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems,}
     return render(request, 'web_project/user_profile.html', context)
+
+
+def saved_address(request):
+
+    customer = request.user.customer
+    order, created= Order.objects.get_or_create(customer=customer, complete=False)
+    orders = Order.objects.filter(customer=customer)
+    cartItems = order.item_total
+    wishlistItems= order.wishlist_item_total        
+    
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        address = ShippingAddress.objects.filter(customer=customer)
+         
+     
+
+    context={'address': address,'name': customer, 'orders': orders, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems,}
+
+    return render(request, 'web_project/saved_address.html', context)
+        
+            
+
+            
    
 
 

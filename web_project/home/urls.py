@@ -23,6 +23,8 @@ urlpatterns = [
     path('logout/', views.logoutpage, name='logout'),
     path('search/', views.search, name='search'),
     path('user_profile/', views.user_profile, name='userprofile'),
+    path('saved_address/', views.saved_address, name='savedaddress'),
+
 
 
 
