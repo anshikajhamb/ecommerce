@@ -10,11 +10,14 @@
         	<h6><strong>{{product.name}}</strong><h7 style="display: inline-block; float: right"><strong>Rs.{{product.price|floatformat:2}}</strong> </h6>
 
             <hr>
-            <button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-			<button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-outline-secondary add-btn update-wishlist">Wishlist</button>
+            <button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-sm btn-outline-secondary  add-btn update-cart">Add to Cart</button>
+			<button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-sm btn-outline-secondary  add-btn update-wishlist">Wishlist</button>
 		
 
-		<a class="btn btn-outline-success" href="/shop/products/{{product.name}}/{{product.uniqueid}}">View Product</a>
+		<a class="btn btn-sm btn-outline-success" href="/shop/products/{{product.name}}/{{product.uniqueid}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+			<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+			<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+		  </svg></a>
 	
 
 		</div>

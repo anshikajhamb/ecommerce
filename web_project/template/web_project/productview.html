@@ -4,31 +4,35 @@
 
 <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
 
-<div class="container my-4">
 
-    <div class="row">
-    <div class="col-md-4">
-    <div class="row">
- <p class="text-uppercase">Average Rating by Buyers: {{rate_average|floatformat:2}}</p>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <div class="h-100 p-5 bg-light border rounded-3">
+        <img src="{{product.imageurl}}" style="width:100%; height:100%;">
 
-<img class="thumbnail1" src="{{product.imageurl}}">    
-    </div>
+      </div>
     </div>
     <div class="col-md-6">
-     <h5> {{product.name}} </h5>
-    <p> <strong>Rs.{{product.price}}</strong> </p>
-    <p> {{product.description}} </p>
-    </div>
+      <div class="h-100 p-5 text-white bg-dark rounded-3">
+        <h5> {{product.name}} </h5>
+        <p> <strong>Rs.{{product.price}}</strong> </p>
+        <p> <strong>Average Ratings: {{rate_average}}/5.0</strong> </p>
 
-    <div class="col-lg-12">
+    <p> {{product.description}} </p>
     <button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-outline-primary add-btn mx-4 update-cart">Add to Cart</button>
 	  <button data-uniqueid="{{product.uniqueid}}" data-action="add" class="btn btn-outline-primary add-btn update-wishlist">Wishlist</button>
 
+      </div>
+    </div>
+  </div>
 
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Write Your Review</span></h1>
+     
+    </div>
 
-</div>
- <div class="col-lg-12">
-    <h5 class="text-uppercase font-weight-bold"> Write Your Review </h5>
+ <div class="col-lg-30" >
 
  <form class="form-group" method="GET" action="/review/{{product.name}}/{{product.uniqueid}}">
 
@@ -36,8 +40,10 @@
 
  
    <div class ="form-group">
-        <textarea class="input" type="text" name="review" placeholder="Add Your Review"> </textarea>
+    <textarea class="form-control"  type="text" name="review" placeholder="Add Your Review"> </textarea>
    </div>
+
+  
 <div class ="form-group">
    <div class= "input rating">
     <p class="text-uppercase">Your Rating: </p>
@@ -68,19 +74,25 @@
 
 <div class="container mt-5">
 
-    <h5 class="text-uppercase font-weight-bold"> Reviews </h5>
-
-    {% for review in reviews%}
-    <p> <strong>{{review.customer}}:</strong> </p>
-    <p> <strong>Rating: {{review.rate}}/5</strong> </p>
-    <p> <i>"{{review.review}}"</i>  </p>
-    <p> <i>Date added : {{review.date_added}}</i> </p>
-  {%endfor %}
+  <h1 class="display-5 fw-bold"><span class="text-muted">Reviews </span></h1>
 
 
-
-
-</form>
 </div>
+{% for review in reviews%}
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="card p-2">
+    <figure class="p-2 mb-0">
+      <blockquote class="blockquote">
+        <p> <strong><i>{{review.customer}} says:</strong></i> </p>
+        <p> <i>"{{review.review}}"</i>  </p>
+        <p> <strong>Rating: {{review.rate}}/5</strong> </p>
+         </blockquote>
+      <figcaption class="blockquote-footer mb-0 text-muted">
+        <p> <i>Date added : {{review.date_added}}</i>
+      </figcaption>
+    </figure>
+  </div>
+</div>
+  {%endfor %}
 
 {% endblock content %}

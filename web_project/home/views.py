@@ -41,18 +41,38 @@ def loginpage(request):
        
         if user is not None:
             login(request, user)
-            return redirect('store')
+            return redirect('home')
 
     context={}
     return render(request, 'web_project/login.html', context)
 
 def logoutpage(request):
     logout(request)
-    return redirect('store')
+    return redirect('home')
 
 
 def about(request):
-    return render(request, 'web_project/about.html')
+    products= Product.objects.all()
+
+    if request.user.is_authenticated:
+        products= Product.objects.all()
+        customer = request.user.customer
+        order, created= Order.objects.get_or_create(customer=customer, complete=False)
+        order_items= order.addtocart_set.all()
+        cartItems = order.item_total
+        wishlistItems= order.wishlist_item_total
+        user_name = 0
+    else: 
+        cookieData = guest_cart(request)
+        cartItems= cookieData['cartItems']
+        order=cookieData['order']
+        wishlistItems = cookieData['wishlistItems']
+        order_items = cookieData['order_items']
+        user_name= request.user
+
+
+    context= {'user_name' : user_name, 'products': products, 'order': order, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items}
+    return render(request, 'web_project/about.html', context)
 
 def checkout(request):
     if request.user.is_authenticated:
@@ -72,6 +92,28 @@ def checkout(request):
         return redirect('login')
         
 
+def home(request):
+    products= Product.objects.all()
+
+    if request.user.is_authenticated:
+        products= Product.objects.all()
+        customer = request.user.customer
+        order, created= Order.objects.get_or_create(customer=customer, complete=False)
+        order_items= order.addtocart_set.all()
+        cartItems = order.item_total
+        wishlistItems= order.wishlist_item_total
+        user_name = 0
+    else: 
+        cookieData = guest_cart(request)
+        cartItems= cookieData['cartItems']
+        order=cookieData['order']
+        wishlistItems = cookieData['wishlistItems']
+        order_items = cookieData['order_items']
+        user_name= request.user
+
+
+    context= {'user_name' : user_name, 'products': products, 'order': order, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items}
+    return render(request, 'web_project/home.html', context)
 
     
 def store(request):
@@ -494,12 +536,12 @@ def search(request):
         order_items= order.addtocart_set.all()
         cartItems = order.item_total
         wishlistItems= order.wishlist_item_total
-
+        
         if request.method == "GET":
             search = request.GET.get('search')
             if search:
                 products = Product.objects.filter(Q(description__icontains=search)|Q(name__icontains=search)|Q(price__icontains=search)|Q(categoryname__icontains=search))
-                context= {'products': products, 'order': order, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items}
+                context= {'products': products, 'order': order, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'order_items' : order_items}               
                 return render(request, 'web_project/search.html', context)
             else:
                 print("search query does not exist")
@@ -552,8 +594,28 @@ def saved_address(request):
     context={'address': address,'name': customer, 'orders': orders, 'cartItems' : cartItems, 'wishlistItems' : wishlistItems,}
 
     return render(request, 'web_project/saved_address.html', context)
+
+def sort_price(request):
+    customer = request.user.customer
+    order, created= Order.objects.get_or_create(customer=customer, complete=False)
+    orders = Order.objects.filter(customer=customer)
+    cartItems = order.item_total
+    wishlistItems= order.wishlist_item_total  
+    products= Product.objects.order_by('price')
+   
+    context={'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'products': products}
+    return render(request, 'web_project/sort_price_low_to_high.html', context)
         
-            
+def sort_price_2(request):
+    customer = request.user.customer
+    order, created= Order.objects.get_or_create(customer=customer, complete=False)
+    orders = Order.objects.filter(customer=customer)
+    cartItems = order.item_total
+    wishlistItems= order.wishlist_item_total  
+    products= Product.objects.order_by('-price')
+   
+    context={'cartItems' : cartItems, 'wishlistItems' : wishlistItems, 'products': products}
+    return render(request, 'web_project/sort_price_high_to_low.html', context)
 
             
    

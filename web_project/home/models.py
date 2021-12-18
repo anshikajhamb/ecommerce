@@ -56,8 +56,7 @@ class Order(models.Model):
                
         return shipping  
 
-                
- 
+            
 
     def cart_total(self):
         total=0

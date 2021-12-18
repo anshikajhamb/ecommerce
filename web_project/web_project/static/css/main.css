@@ -1,14 +1,14 @@
 body{
-	background-color: hsl(0, 0%, 98%);
+	background-color: hsl(0, 28%, 81%);
 }
 
 h1,h2,h3,h4,h5,h6{
-	color:hsl(0, 0%, 30%);
+	color:hsl(0, 67%, 1%);
 }
 
 .box-element{
 	box-shadow:hsla(0, 0%, 80%, 0.856) 0 0 16px;
-	background-color: #fff;
+	background-color: #e4136df5(235, 50, 112);
 	border-radius: 5px;
 	padding: 5px;
 }
@@ -16,7 +16,7 @@ h1,h2,h3,h4,h5,h6{
 
 .box-element1{
 	box-shadow:hsla(0, 0%, 80%, 0.856) 0 0 16px;
-	background-color: #fff;
+	background-color: rgb(241, 235, 235);
 	border-radius: 10px;
 	padding: 5px;
 }
@@ -42,7 +42,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+	background-color: #f0ae57!important;
 }
 
 #cart-icon{
@@ -61,7 +61,7 @@ h1,h2,h3,h4,h5,h6{
 	display: block;
 	text-align: center;
 	color:#fff;
-	background-color: red;
+	background-color: rgb(247, 4, 25);
 	width: 20px;
 	height: 25px;
 	border-radius: 50%;
@@ -73,7 +73,7 @@ h1,h2,h3,h4,h5,h6{
 	display: block;
 	text-align: center;
 	color:#fff;
-	background-color: rgba(255, 208, 0, 0.932);
+	background-color: rgba(255, 136, 0, 0.932);
 	width: 20px;
 	height: 25px;
 	border-radius: 50%;
@@ -183,7 +183,7 @@ div.stars {
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #c5f1f7 !important;
+			background: #e7ecdb !important;
 		}
 		.user_card {
 			width: 350px;
